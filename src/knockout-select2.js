@@ -85,6 +85,24 @@
             setTimeout(function() {                
                 init.apply(null, args);
             }, 0);
+        },
+
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var allBindings = allBindingsAccessor();
+
+            // If we have a hasFocus binding, update the select2 to reflect any changes
+            var hasFocus = allBindings.hasFocus;
+            if (hasFocus) {
+                if ($(element).data("select2")) {
+                    $(element).select2('open');
+
+                    $(element).on('select2:close', function (evt) {
+                        allBindings.hasFocus = false;
+                    });
+                }
+            }
+
+            $(element).trigger('change');
         }
     };
 });
