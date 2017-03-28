@@ -95,10 +95,6 @@
             if (hasFocus) {
                 if ($(element).data("select2")) {
                     $(element).select2('open');
-
-                    $(element).on('select2:close', function (evt) {
-                        allBindings.hasFocus = false;
-                    });
                 }
             }
 
